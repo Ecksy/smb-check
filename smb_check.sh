@@ -1,5 +1,6 @@
 #!/bin/bash
 
+start=$(date +%s)
 FILE=smb_endpoints
 OUT_FILE=smb_check_no_auth
 AUTH_FILE=
@@ -72,5 +73,7 @@ while read p; do
 		done <<< "$SHARES"
 	fi
 done <$FILE
-
+end=$(date +%s)
+runtime=$((end-start))
 echo -e "$SUCCESS All done! Results written to file at $OUT_FILE. Exiting."
+echo "Program has finished execution in $runtime seconds."

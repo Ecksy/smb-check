@@ -1,8 +1,9 @@
 #!/bin/bash
 
 start=$(date +%s)
+clientname=$1
 FILE=smb_endpoints
-OUT_FILE=smb_check_no_auth
+OUT_FILE=$clientname-smb_check_no_auth.txt
 AUTH_FILE=
 
 INFO="[ \033[1;33m=\033[0m ] "
@@ -46,8 +47,8 @@ while read p; do
 				COMMAND="smbclient -A $AUTH_FILE \\\\\\\\$p\\\\$line -c ls 2>/dev/null"
 			fi
 			SHARE_RESULT=$(eval $COMMAND)
-			echo "$COMMAND" >> smbclient_responses
-			echo "$SHARE_RESULT" >> smbclient_responses
+			echo "$COMMAND" >> $clientname-smbclient_responses.txt
+			echo "$SHARE_RESULT" >> $clientname-smbclient_responses.txt
 			if [[ $SHARE_RESULT == *"NT_STATUS_ACCESS_DENIED"* ]]; then
 				echo -e "$FAIL Access denied to \\\\\\\\$p\\\\$line."
 			elif [[ $SHARE_RESULT == *"NT_STATUS_BAD_NETWORK_NAME"* ]]; then

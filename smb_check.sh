@@ -5,6 +5,10 @@ clientname=$1
 FILE=smb_endpoints
 OUT_FILE=$clientname-smb_check_no_auth.txt
 AUTH_FILE=
+#Auth file format
+#username = <USER>
+#password = <PASSWORD>
+#domain   = <DOMAIN>
 
 INFO="[ \033[1;33m=\033[0m ] "
 SUCCESS="[ \033[1;32m+\033[0m ] "
